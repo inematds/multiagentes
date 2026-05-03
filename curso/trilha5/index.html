@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 5 - Multi-runtime + Capstone | Equipes de Agentes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .bg-teal-500\/20 { background-color: rgba(13, 148, 136, 0.12); }
+    html:not(.dark) .bg-teal-500\/10 { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .border-teal-500\/30 { border-color: rgba(13, 148, 136, 0.25); }
+    html:not(.dark) .hover\:bg-teal-500\/30:hover { background-color: rgba(13, 148, 136, 0.18); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span>
+            <span class="font-bold text-lg hidden sm:inline">Equipes de Agentes</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Setup</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Operação</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Diagnóstico</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-teal-400 bg-teal-500/10"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Multi-runtime</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-teal-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-teal-500/20 text-teal-400 text-xs font-semibold rounded-full mb-4">TRILHA 5</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🌐 Multi-runtime + Capstone</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Codex e Gemini para portar squads, padrão portátil e o projeto final NeuroFlow Pro.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">4</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">24</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">~3h+4h</div><div class="text-xs text-neutral-400">+ Capstone</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-teal-400">Avanç.</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+    <!-- MODULO 5.1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🔧 Codex CLI Subagents</h3>
+        <p class="text-neutral-400 text-sm">TOML, max_threads/max_depth, spawn_agents_on_csv e Symphony.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">📁</span><div><span class="font-medium">Onde definir agents</span><span class="text-neutral-500 text-sm ml-2">- ~/.codex/agents/ ou .codex/agents/</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada agent é um arquivo TOML em <code class="text-teal-400">~/.codex/agents/</code> (user) ou <code class="text-teal-400">.codex/agents/</code> (projeto).</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mesma ideia do Claude Code subagents — definição declarativa que vira "tipo" reusável.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Campos obrigatórios: name, description, developer_instructions; opcionais: model, sandbox_mode, mcp_servers.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">⚙️</span><div><span class="font-medium">Config global [agents]</span><span class="text-neutral-500 text-sm ml-2">- max_threads, max_depth</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Seção <code class="text-teal-400">[agents]</code> no config controla concorrência: max_threads (default 6), max_depth (default 1), job_max_runtime_seconds.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a forma de impedir explosão de custo e nesting descontrolado.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Threads = paralelismo; depth = recursão; timeout previne workers travados.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🪪</span><div><span class="font-medium">Nicknames e display</span><span class="text-neutral-500 text-sm ml-2">- nickname_candidates</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Array <code class="text-teal-400">nickname_candidates</code> dá nomes legíveis às múltiplas instâncias do mesmo agent.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem isso, instâncias ficam como "agent-1, agent-2..." e diagnóstico vira sopa.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Use <code class="text-teal-400">/agent</code> para alternar threads; nicknames temáticos ("Athena", "Hermes") ajudam memória.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">📊</span><div><span class="font-medium">spawn_agents_on_csv</span><span class="text-neutral-500 text-sm ml-2">- Batch experimental</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Tool experimental do Codex que processa cada linha de CSV com 1 worker e exporta resultados.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Casos como auditar 200 PRs ou gerar resumo de 500 issues ficam triviais.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">1 worker por linha; coleta resultados; respeita max_threads global.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🛡️</span><div><span class="font-medium">Sandbox e approval inheritance</span><span class="text-neutral-500 text-sm ml-2">- Politica do pai</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Subagents herdam sandbox e approval policies do parent. Erros propagam para o workflow.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Em CI/non-interactive, approval que não consegue subir falha o run inteiro — preveja com sandbox.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm"><code class="text-teal-400">sandbox_mode</code> por agent; runtime overrides são herdados; CI deve ter sandbox forte.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🎼</span><div><span class="font-medium">Symphony: orquestração no Linear</span><span class="text-neutral-500 text-sm ml-2">- Spec aberto</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Spec open-source da OpenAI que turbinou times reportadamente em +500% PRs aterrissados ao usar Linear como control plane.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Aponta para "agentes em pipeline" governados por tickets — direção que o mercado todo está tomando.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Codex como MCP server; Agents SDK para orquestrar; deterministic + reviewable.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><a href="modulo-5-1.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <!-- MODULO 5.2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">💎 Gemini CLI Subagents</h3>
+        <p class="text-neutral-400 text-sm">Markdown + YAML, @subagent, paralelismo e built-ins.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">📝</span><div><span class="font-medium">Formato Markdown + YAML</span><span class="text-neutral-500 text-sm ml-2">- .gemini/agents/*.md</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada subagent = arquivo .md com frontmatter YAML; corpo do markdown é o system prompt.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Familiar para quem usa Claude Code; muito legível; versionável em git.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Required: name, description, kind; opcionais: tools, model, temperature, max_turns, timeout_mins.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">@</span><div><span class="font-medium">@nome para forçar uso</span><span class="text-neutral-500 text-sm ml-2">- Determinismo</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Prefixar a instrução com <code class="text-teal-400">@subagent_name</code> força o uso explícito sem deixar o main agent escolher.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Em debug, você quer determinismo; auto-delegation pode atrapalhar reproduzir um bug.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">@nome no início; auto-delegation por padrão; mistura possível ("@codebase_investigator descobre, depois generalist resume").</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">⚡</span><div><span class="font-medium">Paralelismo em Gemini</span><span class="text-neutral-500 text-sm ml-2">- Múltiplas instâncias</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gemini suporta vários subagents (ou várias instâncias do mesmo) em paralelo, reduzindo wall-clock.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Padrão "tool exposto ao agente principal" combinado com paralelismo é poderoso.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Sem nesting (proteção de recursão); cada subagent isolado em context loop; main agente coleta.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🛠️</span><div><span class="font-medium">Built-ins: codebase, cli_help, generalist, browser</span><span class="text-neutral-500 text-sm ml-2">- Already there</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Gemini vem com codebase_investigator, cli_help, generalist e browser_agent (experimental) prontos.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Antes de criar novo subagent, veja se um built-in já resolve. Reduz manutenção.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">codebase_investigator = exploração; cli_help = doc CLI; generalist = task pesada genérica; browser_agent = web.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">🌎</span><div><span class="font-medium">Remote subagents</span><span class="text-neutral-500 text-sm ml-2">- kind: remote</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Subagents podem rodar remotamente (kind: remote). Útil quando quer isolamento ou recursos diferentes.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Mover work pesado para máquinas remotas é bom para CI e privacidade local.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Local default; remote para offload; observabilidade extra recomendada.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🚧</span><div><span class="font-medium">Limitações principais</span><span class="text-neutral-500 text-sm ml-2">- Sem subagent → subagent</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Subagent não pode invocar outro subagent (recursion protection); tools restritos por allowlist.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Modelagem hierárquica não funciona; pense flat e use o main agent como orquestrador.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Flat &gt; nested; tools whitelisted no frontmatter; isolamento total de contexto.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><a href="modulo-5-2.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <!-- MODULO 5.3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🧩 Padrão portátil</h3>
+        <p class="text-neutral-400 text-sm">A "interface mental" que vale para Claude Code, Codex e Gemini.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">🧠</span><div><span class="font-medium">Role + Tools + Owned files + Handoff</span><span class="text-neutral-500 text-sm ml-2">- 4 atributos universais</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Toda definição de agent em qualquer runtime tem 4 conceitos: papel, tools permitidas, arquivos que possui, e quem recebe seu output.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Pensar nesse contrato te dá portabilidade; muda só a sintaxe entre runtimes.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Role = system prompt; Tools = allowlist; Owned = território; Handoff = mailbox/return.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">📋</span><div><span class="font-medium">Mapeamento Claude/Codex/Gemini</span><span class="text-neutral-500 text-sm ml-2">- Tabela 1:1</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada conceito tem um nome em cada runtime: subagent definition (Claude) / TOML agent (Codex) / .md agent (Gemini).</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Tabela mental de tradução acelera migração e evita "preciso reaprender tudo".</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Frontmatter ↔ TOML ↔ YAML; tools allowlist ↔ tools array; mailbox ↔ N/A em subagents.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">🔄</span><div><span class="font-medium">Lab: PR review nos 3 runtimes</span><span class="text-neutral-500 text-sm ml-2">- O mesmo squad portado</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Implemente o squad de PR review (security + perf + tests) em Claude Code, Codex e Gemini.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ver lado a lado o que muda e o que não muda solidifica a abstração portátil.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mesmo prompt base; ajuste sintaxe da definição; tem "team" só em Claude Code; subagents bastam para review.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🎚️</span><div><span class="font-medium">Quando trocar de runtime</span><span class="text-neutral-500 text-sm ml-2">- Critérios práticos</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Claude Code Teams quando precisa de mailbox; Codex quando quer Symphony/Linear; Gemini quando integra com Google.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Não brigue com o runtime: cada um tem força em cenários distintos.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mailbox = Claude; pipeline em ticket = Codex+Symphony; Google Workspace = Gemini.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">📤</span><div><span class="font-medium">Exportar prompts entre runtimes</span><span class="text-neutral-500 text-sm ml-2">- Conversões automáticas</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um prompt-base + 3 wrappers (frontmatter, TOML, YAML) é o que você quer manter no repositório.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reduz drift entre versões; muda 1 vez, propaga para todos.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Source of truth = .md; wrappers em geradores; CI valida que estão sincronizados.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">📚</span><div><span class="font-medium">Frameworks acima dos CLIs</span><span class="text-neutral-500 text-sm ml-2">- LangGraph, CrewAI, Agents SDK</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Quando complexidade cresce (cycles, branching, observabilidade), framework Python pode substituir o CLI.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">CLI vs framework é trade-off de produtividade vs controle. Saber quando trocar.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">CrewAI = papéis; LangGraph = grafo; AG2 = chat; Agents SDK = pipeline declarativo.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><a href="modulo-5-3.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <!-- MODULO 5.4 - CAPSTONE -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-teal-400 font-bold">5.4</span><span class="text-xs text-neutral-500">~4h</span></div>
+        <h3 class="text-2xl font-bold mb-2">🎓 Capstone: NeuroFlow Pro</h3>
+        <p class="text-neutral-400 text-sm">Squad de 5 agentes constrói um app full-stack com auth + testes + relatório QA + doc.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span><span class="text-lg">📋</span><div><span class="font-medium">Briefing</span><span class="text-neutral-500 text-sm ml-2">- O que será construído</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">App full-stack: API REST (users + posts), front React, JWT, suíte de testes, relatório QA, doc operacional.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É realista o suficiente para exercitar todas as armadilhas; pequeno o suficiente para terminar em 4h.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">App rodando em localhost:3000; <code class="text-teal-400">tests/report.md</code>; <code class="text-teal-400">docs/build-summary.md</code>; <code class="text-teal-400">docs/cost-report.md</code>.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span><span class="text-lg">👥</span><div><span class="font-medium">Squad sugerido (5 agentes)</span><span class="text-neutral-500 text-sm ml-2">- Backend, Frontend, QA, Sec, Tech Writer</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">5 teammates Sonnet com territórios distintos: src/api, src/ui, tests/, audits/, docs/.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a aplicação prática de tudo que veio antes — territórios, mailbox, plan mode, hooks.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Security Reviewer como subagent definition reusável; Tech Writer com Haiku para reduzir custo.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span><span class="text-lg">📐</span><div><span class="font-medium">Rubrica de avaliação</span><span class="text-neutral-500 text-sm ml-2">- 100 pontos</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">25 pts prompt; 20 pts hooks; 20 pts testes verdes; 15 pts custo; 10 pts cleanup; 10 pts portabilidade.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Critérios objetivos forçam você a aplicar conceitos do curso, não só "fazer rodar".</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Auto-avaliação primeiro; depois revisão de pares; pontuar honestamente.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span><span class="text-lg">🪝</span><div><span class="font-medium">Quality gates obrigatórios</span><span class="text-neutral-500 text-sm ml-2">- Hooks que bloqueiam</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Pelo menos 1 hook ativo no projeto: tests passando ao TaskCompleted, ou block-rm em PreToolUse.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem quality gate, "rodar" não é "qualidade". Hook é o que separa demo de entrega.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Hooks no <code class="text-teal-400">.claude/settings.json</code>; logs em arquivo; trigger por matcher.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span><span class="text-lg">📊</span><div><span class="font-medium">Cost report</span><span class="text-neutral-500 text-sm ml-2">- Tokens, modelos, justificativa</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Documento <code class="text-teal-400">docs/cost-report.md</code> com tokens por teammate, modelo escolhido por papel, e justificativa do tamanho do squad.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o critério que diferencia engenheiro de "cliquei no botão". Mostra que entende custo.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tokens por papel; modelo justificado; "por que 5 e não 3"; alternativa considerada.</p></div></div></div></div>
+        <div class="topic-item"><button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left"><span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span><span class="text-lg">🎬</span><div><span class="font-medium">Apresentação final</span><span class="text-neutral-500 text-sm ml-2">- 5 min de demo + 5 min de Q&A</span></div></button><div class="topic-explanation px-6 pb-4"><div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9"><div><span class="text-teal-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Grave 5 min mostrando spawn, mailbox, idle notifications e cleanup; depois discuta decisões.</p></div><div><span class="text-teal-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Apresentar consolida; outros aprendem com seus erros e acertos; portfolio show-piece.</p></div><div><span class="text-teal-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tempo curto força clareza; mostre só o que importa; admita o que não funcionou.</p></div></div></div></div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3"><a href="modulo-5-4.html" class="px-4 py-2 text-sm bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition-colors">Ver Completo</a></div>
+    </div>
+
+    <!-- CTA FINAL -->
+    <section class="mb-12">
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-8">
+        <h2 class="text-2xl font-bold mb-4 flex items-center">
+          <span class="mr-3">🏁</span> Você terminou o curso
+        </h2>
+        <p class="text-neutral-300 mb-4">Você agora consegue: (1) decidir entre subagent, equipe e sessão; (2) escrever prompts de spawn que funcionam; (3) configurar hooks como quality gates; (4) operar uma equipe em tmux com plan mode; (5) calcular custo e desligar limpo; (6) replicar o padrão em Codex e Gemini.</p>
+        <p class="text-neutral-300">O próximo passo é levar isso para o seu projeto real e construir o seu primeiro squad de produção.</p>
+      </div>
+    </section>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha anterior: Diagnóstico</a>
+      <a href="../../index.html" class="flex-1 text-center px-6 py-3 bg-teal-600 text-white rounded-lg font-semibold hover:bg-teal-500 transition-colors">Voltar ao início ↑</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Equipes de Agentes na Prática • 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trilha 3 - Operação | Equipes de Agentes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    .topic-explanation { display: none; }
+    .topic-explanation.active { display: block; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span>
+            <span class="font-bold text-lg hidden sm:inline">Equipes de Agentes</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Setup</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Operação</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Diagnóstico</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Multi-runtime</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">TRILHA 3</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🎮 Operação</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">As 3 regras de ouro, contexto e permissões, plan mode, hooks como quality gates e split-pane no tmux.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">5</div><div class="text-xs text-neutral-400">Módulos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">30</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">~4h</div><div class="text-xs text-neutral-400">Duração</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Inter.</div><div class="text-xs text-neutral-400">Nível</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
+
+    <!-- MODULO 3.1 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">📜 As 3 regras de ouro</h3>
+        <p class="text-neutral-400 text-sm">Território, mensagens diretas, paralelismo real — princípios não negociáveis.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🏷️</span>
+            <div><span class="font-medium">Regra 1: território próprio</span><span class="text-neutral-500 text-sm ml-2">- Um arquivo, um dono</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Cada arquivo crítico tem 1 e somente 1 teammate dono. Outros podem ler, mas só o dono escreve.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a regra mais quebrada e a que mais causa estrago: overwrite silencioso e merge implícito.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Defina territórios no spawn; pastas-âncora por papel; troca via mensagem com link de arquivo.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">📬</span>
+            <div><span class="font-medium">Regra 2: mensagens diretas</span><span class="text-neutral-500 text-sm ml-2">- Evite o lead como middleman</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Teammates falam direto entre si via <code class="text-purple-400">SendMessage</code>; o lead só entra para sintetizar ou desempatar.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Tudo passar pelo lead serializa o time e desperdiça tokens em consolidação prematura.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Mensagem unicast por nome; "envie o contrato da API para Frontend"; lead como árbitro.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">⚡</span>
+            <div><span class="font-medium">Regra 3: paralelismo real</span><span class="text-neutral-500 text-sm ml-2">- Todos começam ao mesmo tempo</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Spawn em paralelo + tasks independentes na partida. Quem precisa esperar, espera por mensagem — não por turno.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Trabalho sequencial mascarado de "team" é o pior dos mundos: custo de team com latência de single.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tasks paralelas; dependências explícitas; fan-out + fan-in; "todos acordam juntos".</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🚧</span>
+            <div><span class="font-medium">Demo de conflito de arquivo</span><span class="text-neutral-500 text-sm ml-2">- Aprender pelo erro</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Lab que força dois teammates a editar o mesmo arquivo e mostra o overwrite — depois corrige com ownership.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ver acontecer treina o olho. Você nunca mais esquece de definir território.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Reproduzir o bug; corrigir o prompt; rodar de novo; ver a diferença lado a lado.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📐</span>
+            <div><span class="font-medium">Quando "quebrar" as regras</span><span class="text-neutral-500 text-sm ml-2">- Exceções documentadas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Casos pequenos onde 1 arquivo compartilhado é OK (ex: TODO.md temporário) — desde que documentado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Regras viram dogma se não tiverem exceções claras; saber quebrar com critério é parte do ofício.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Apenas append; lock explícito via mensagem; nunca em arquivos críticos.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🔍</span>
+            <div><span class="font-medium">Auditoria pós-execução</span><span class="text-neutral-500 text-sm ml-2">- Verificar adesão</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Após uma execução, revisar mailbox + git diff + task list para ver se as 3 regras foram seguidas.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Times "aparentemente bem" às vezes serializam por baixo. Auditar fecha o ciclo de aprendizado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">git blame + autor (teammate name); contagem de mensagens P2P vs lead; tempo de wall-clock por papel.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-1.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 3.2 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.2</span><span class="text-xs text-neutral-500">~45 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🧠 Contexto e permissões</h3>
+        <p class="text-neutral-400 text-sm">O que cada teammate carrega ao acordar e como controlar o que ele pode fazer.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">📖</span>
+            <div><span class="font-medium">CLAUDE.md compartilhado</span><span class="text-neutral-500 text-sm ml-2">- A "constituição" do projeto</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Todo teammate carrega CLAUDE.md do diretório de trabalho ao acordar — é o jeito mais robusto de dar instruções globais.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Boilerplate no spawn é caro; o que vale para todos vai no CLAUDE.md.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Convenções de código; mapas de pastas; políticas de testes; quando NÃO usar (instruções específicas da tarefa).</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">🚫</span>
+            <div><span class="font-medium">O que NÃO carrega</span><span class="text-neutral-500 text-sm ml-2">- Histórico do lead fica fora</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Conversa anterior do lead, decisões tomadas no chat, contexto implícito — tudo isso fica fora do teammate.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a fonte mais comum de "o agente esqueceu o que combinamos": ele simplesmente nunca soube.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Tudo que importa vai no spawn ou em CLAUDE.md; histórico do lead é privado por design.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🛠️</span>
+            <div><span class="font-medium">Subagent definitions reusáveis</span><span class="text-neutral-500 text-sm ml-2">- security-reviewer, test-runner...</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Um teammate pode usar uma subagent definition (em <code class="text-purple-400">.claude/agents/</code>) como tipo, herdando tools e modelo.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Uma vez que você tem um security-reviewer bom, vale para o time todo — não reescreva.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Body anexado ao system prompt; <code class="text-purple-400">tools</code> allowlist respeitada; <code class="text-purple-400">skills</code>/<code class="text-purple-400">mcpServers</code> NÃO se aplicam.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🔒</span>
+            <div><span class="font-medium">Modos de permissão pós-spawn</span><span class="text-neutral-500 text-sm ml-2">- Trocar enquanto rodando</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Você pode mudar o modo de permissão de um teammate específico depois que ele já está rodando.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Útil para "soltar" o agente quando ele provou que pode, ou apertar quando ele se mostra aventureiro.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Por teammate, em runtime; não há "per-teammate mode no spawn"; mensagem direta ao agente alvo.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">📁</span>
+            <div><span class="font-medium">Onde a equipe vive em disco</span><span class="text-neutral-500 text-sm ml-2">- ~/.claude/teams/ e tasks/</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Config em <code class="text-purple-400">~/.claude/teams/{team}/config.json</code>; tasks em <code class="text-purple-400">~/.claude/tasks/{team}/</code>.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber inspecionar ajuda a entender estado do time e diagnosticar travamentos.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">NÃO editar config à mão; pode ler para diagnóstico; tasks com locking automático.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🌐</span>
+            <div><span class="font-medium">MCP servers e impacto no time</span><span class="text-neutral-500 text-sm ml-2">- Toda a equipe ganha acesso</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">MCP servers configurados no projeto/user ficam disponíveis a todos os teammates como tools.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ótima alavanca: 1 servidor MCP de qualidade = N teammates instantaneamente capazes.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Allowlist de tools por papel; auditoria via PostToolUse hook; cuidado com MCP que escrevem.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-2.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 3.3 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">📋 Aprovação de plano</h3>
+        <p class="text-neutral-400 text-sm">Plan mode obrigatório, critérios de aprovação e ciclo de revisão.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🔍</span>
+            <div><span class="font-medium">Plan mode read-only</span><span class="text-neutral-500 text-sm ml-2">- Pesquisar antes de mexer</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Teammate inicia em plan mode (sem write tools), pesquisa, monta o plano e só depois passa para execução.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Reduz drasticamente "agente fez merda no caminho errado"; pesquisa primeiro, executa depois.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Read-only por construção; tools de escrita desativadas; plano em formato estruturado.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">📤</span>
+            <div><span class="font-medium">Enviar plano ao lead</span><span class="text-neutral-500 text-sm ml-2">- Approval request</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Teammate envia plano formalmente para o lead via approval request. Lead pode aprovar ou rejeitar com feedback.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É um dos poucos pontos onde o lead bloqueia explicitamente o teammate — controle de qualidade.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Aprovação ou rejeição com motivo; rejeitado = volta para plan mode; loop até OK.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">📏</span>
+            <div><span class="font-medium">Critérios para o lead aprovar</span><span class="text-neutral-500 text-sm ml-2">- Instruções no prompt</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">"Só aprove se o plano cobre testes; rejeite se mexe em schema". Critérios viram texto no prompt do lead.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem critérios, o lead aprova quase tudo. Critérios explícitos transformam ele em portão de qualidade.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Cobertura de testes; sem migração de DB sem flag; sem novos endpoints; "X linhas no máximo".</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🔁</span>
+            <div><span class="font-medium">Ciclo de revisão</span><span class="text-neutral-500 text-sm ml-2">- Plano → feedback → revisão</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Quando rejeitado, teammate fica em plan mode, revisa com base no feedback e resubmete.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É o equivalente a "PR review" — apenas no spawn. Aproveita para enxugar escopo antes da execução.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Loop limitado por bom-senso; lead pode promover plano com mudanças; saída do plan mode = execução libera.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">👤</span>
+            <div><span class="font-medium">Você como aprovador</span><span class="text-neutral-500 text-sm ml-2">- Quando assumir o controle</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Em tarefas críticas, você pode pedir para todo plano passar pelo humano antes da execução.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">No início, aprovar manualmente é o melhor jeito de calibrar critérios para depois delegar ao lead.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">"Send all plans to me"; usar em produção/migrações; promover progressivamente o lead.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🧪</span>
+            <div><span class="font-medium">Lab: aprovador autônomo</span><span class="text-neutral-500 text-sm ml-2">- Plan mode em prática</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Spawn de "architect" em plan mode obrigatório, com 3 critérios de aprovação no prompt do lead.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Ver o ciclo completo treina o vocabulário e te dá confiança para operar sem aprovador humano.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Lab repetível; medir ciclos plano-revisão; ajustar critérios quando aprovar muito ou rejeitar muito.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-3.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 3.4 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.4</span><span class="text-xs text-neutral-500">~55 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🪝 Hooks como quality gates</h3>
+        <p class="text-neutral-400 text-sm">TaskCreated, TaskCompleted, TeammateIdle e PreToolUse — bloqueio com exit code 2.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🎣</span>
+            <div><span class="font-medium">Anatomia de um hook</span><span class="text-neutral-500 text-sm ml-2">- Evento, matcher, comando</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Hook = evento (PreToolUse, TaskCompleted...) + matcher (qual tool/situação) + handler (script/HTTP).</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Hooks são determinísticos. Onde prompt pode falhar, hook bloqueia com certeza.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Configurados em settings.json; matcher por regex; exit code 2 = bloqueia + envia stderr ao agente.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">📝</span>
+            <div><span class="font-medium">TaskCreated</span><span class="text-neutral-500 text-sm ml-2">- Bloquear criação de task</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Dispara antes da task entrar na lista; pode bloquear com exit 2 + motivo no stderr.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Útil para vetar tasks ambíguas, com escopo grande demais ou que extrapolam o orçamento.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">JSON na stdin com title/description; feedback no stderr volta ao agente como instrução.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">✅</span>
+            <div><span class="font-medium">TaskCompleted: rodar testes</span><span class="text-neutral-500 text-sm ml-2">- Não fecha sem verde</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Hook que roda <code class="text-purple-400">pytest</code>/<code class="text-purple-400">npm test</code> e bloqueia o "completed" se algo falha.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Transforma a task list em garantia de qualidade — não dá para "fechar tarefa quebrada".</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Exit 2 com saída do pytest; quick subset de testes na task local; full suite no hook do team.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">😴</span>
+            <div><span class="font-medium">TeammateIdle: bloquear idle</span><span class="text-neutral-500 text-sm ml-2">- Forçar mais um round</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Quando um teammate vai dormir, hook pode dizer "ainda não, faltam estes deliverables" e devolvê-lo ao trabalho.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Evita "idle prematuro" comum em sessões longas — agente "achou que terminou".</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Verificar arquivos requeridos; checar status de testes; só liberar quando tudo presente.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">🛡️</span>
+            <div><span class="font-medium">PreToolUse: bloquear comandos</span><span class="text-neutral-500 text-sm ml-2">- Não deixar rodar rm -rf</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Hook que inspeciona parâmetros do tool antes de rodar — bloqueia padrões perigosos como <code class="text-purple-400">rm -rf</code>.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É a sua rede de segurança. Mesmo com permissões liberadas, hook protege contra acidentes.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Matcher por tool name; <code class="text-purple-400">if "Bash(rm *)"</code>; permissionDecision deny + reason.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">📈</span>
+            <div><span class="font-medium">Stop e PostToolUse: telemetria</span><span class="text-neutral-500 text-sm ml-2">- O que medir e quando</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Stop dispara ao fim de cada turno; PostToolUse após cada tool. Bons para logar custo, latência e erros.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem telemetria você não otimiza. Hooks de log dão dados para decidir tamanhos e modelos.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Logar em arquivo; decision "block" do Stop só em casos raros; cuidado com loops com Stop bloqueando.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-4.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <!-- MODULO 3.5 -->
+    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+      <div class="p-6 border-b border-dark-600">
+        <div class="flex items-center justify-between mb-2"><span class="text-purple-400 font-bold">3.5</span><span class="text-xs text-neutral-500">~40 min</span></div>
+        <h3 class="text-2xl font-bold mb-2">🖥️ Display: tmux, iTerm2, split-pane</h3>
+        <p class="text-neutral-400 text-sm">Quando vale a pena ver tudo ao vivo, atalhos do lead e armadilhas por terminal.</p>
+      </div>
+      <div class="divide-y divide-dark-600">
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">1</span>
+            <span class="text-lg">🪟</span>
+            <div><span class="font-medium">In-process: tudo no mesmo terminal</span><span class="text-neutral-500 text-sm ml-2">- Default conservador</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Modo in-process: lead lista teammates; Shift+Down circula entre eles; Enter abre, Esc fecha.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Funciona em qualquer terminal. É o jeito mais portátil de usar Teams.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Shift+Down; Ctrl+T para task list; mensagens diretas digitando após selecionar.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">2</span>
+            <span class="text-lg">📊</span>
+            <div><span class="font-medium">Tmux: split-pane real</span><span class="text-neutral-500 text-sm ml-2">- Cada teammate em um pane</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Modo tmux: cada teammate ganha um pane próprio; você vê tudo simultaneamente.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Para diagnóstico e demos é imbatível: você vê quem está em idle e quem está trabalhando.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Instale tmux pelo gerenciador; <code class="text-purple-400">--teammate-mode tmux</code>; clique para interagir.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">3</span>
+            <span class="text-lg">🍎</span>
+            <div><span class="font-medium">iTerm2 + it2 CLI</span><span class="text-neutral-500 text-sm ml-2">- Alternativa no macOS</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">No macOS, iTerm2 com it2 CLI + Python API entrega split-pane sem precisar de tmux puro.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">É mais "nativo" no macOS; tmux -CC dentro de iTerm2 é o entrypoint recomendado.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Habilitar Python API nas Settings; instalar it2 CLI; usar tmux -CC para integração.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">4</span>
+            <span class="text-lg">🪦</span>
+            <div><span class="font-medium">Pitfalls em VS Code/Windows</span><span class="text-neutral-500 text-sm ml-2">- Onde split NÃO roda</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">VS Code integrated terminal, Windows Terminal e Ghostty NÃO suportam split-pane.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Saber evita 30 minutos de "por que meus teammates não aparecem em paneis?". Use in-process nesses terminais.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Verifique <code class="text-purple-400">which tmux</code>; se faltar, instale; use <code class="text-purple-400">--teammate-mode in-process</code>.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">5</span>
+            <span class="text-lg">⌨️</span>
+            <div><span class="font-medium">Atalhos do lead</span><span class="text-neutral-500 text-sm ml-2">- Shift+Down, Ctrl+T, Esc</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Shift+Down circula teammates; Ctrl+T abre task list; Esc interrompe turno; Enter foca.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sem atalhos você perde 50% da produtividade; com atalhos você opera o time como um pianista.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Memorizar 4 atalhos; alternar lead ↔ teammate; mensagem direta em foco.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="topic-item">
+          <button onclick="toggleTopic(this)" class="w-full px-6 py-4 flex items-center space-x-3 hover:bg-dark-700/50 transition-colors text-left">
+            <span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-400 text-sm font-bold flex items-center justify-center flex-shrink-0">6</span>
+            <span class="text-lg">🧹</span>
+            <div><span class="font-medium">Tmux órfão e cleanup</span><span class="text-neutral-500 text-sm ml-2">- Mate sessões esquecidas</span></div>
+          </button>
+          <div class="topic-explanation px-6 pb-4">
+            <div class="bg-dark-700/50 rounded-lg p-4 space-y-3 ml-9">
+              <div><span class="text-purple-400 font-semibold">O que é:</span><p class="text-neutral-300 text-sm">Quando o team não fecha limpo, sessões tmux ficam órfãs. Use <code class="text-purple-400">tmux ls</code> + <code class="text-purple-400">tmux kill-session</code>.</p></div>
+              <div><span class="text-purple-400 font-semibold">Por que aprender:</span><p class="text-neutral-300 text-sm">Sessões órfãs consomem memória e podem confundir o próximo run.</p></div>
+              <div><span class="text-purple-400 font-semibold">Conceitos-chave:</span><p class="text-neutral-300 text-sm">Encerre via lead primeiro; tmux só é último recurso; padronize nome de sessão.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-dark-700/30 flex justify-start space-x-3">
+        <a href="modulo-3-5.html" class="px-4 py-2 text-sm bg-purple-600 hover:bg-purple-500 text-white rounded-lg transition-colors">Ver Completo</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <a href="../trilha2/index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Trilha anterior: Setup</a>
+      <a href="../trilha4/index.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próxima trilha: Diagnóstico →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Equipes de Agentes na Prática • 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTopic(button) {
+      const topicItem = button.closest('.topic-item');
+      const explanation = topicItem.querySelector('.topic-explanation');
+      const moduleCard = button.closest('.bg-dark-800');
+      moduleCard.querySelectorAll('.topic-explanation.active').forEach(exp => {
+        if (exp !== explanation) exp.classList.remove('active');
+      });
+      explanation.classList.toggle('active');
+    }
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
