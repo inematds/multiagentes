@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 6.2 - Configuração & Prompting | Equipes de Agentes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-pink-400 { color: #db2777; }
+    html:not(.dark) .bg-pink-500\/20 { background-color: rgba(219, 39, 119, 0.12); }
+    html:not(.dark) .bg-pink-500\/10 { background-color: rgba(219, 39, 119, 0.08); }
+    html:not(.dark) .border-pink-500\/30 { border-color: rgba(219, 39, 119, 0.25); }
+    html:not(.dark) .hover\:bg-pink-500\/30:hover { background-color: rgba(219, 39, 119, 0.18); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .hover\:text-purple-400:hover { color: #7c3aed; }
+    html:not(.dark) .hover\:bg-purple-500\/10:hover { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+    .img-card { background: #0b1220; border-radius: 0.75rem; padding: 1.5rem; }
+    html:not(.dark) .img-card { background: #f3f4f6; }
+    .img-card img { width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span>
+            <span class="font-bold text-lg hidden sm:inline">Equipes de Agentes</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Setup</span></a>
+          <a href="../trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Operação</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Diagnóstico</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Multi-runtime</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-pink-400 bg-pink-500/10"><span class="sm:hidden">T6</span><span class="hidden sm:inline">Visual</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-pink-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-pink-400">Visual</a>
+      <span>/</span>
+      <span class="text-pink-400">Módulo 6.2</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-pink-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-pink-500/20 text-pink-400 text-xs font-semibold rounded-full mb-4">MÓDULO 6.2</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">⚙️ Configuração & prompting</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">Como ligar Equipes no settings.json, o template de prompt que sempre funciona e a tabela FAÇA / NÃO FAÇA.</p>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+    <!-- CARD 1 -->
+    <section>
+      <div class="flex items-center space-x-3 mb-6">
+        <span class="w-10 h-10 rounded-full bg-pink-500/20 text-pink-400 text-lg font-bold flex items-center justify-center">1</span>
+        <h2 class="text-2xl font-bold">Ativando Equipes no Claude Code</h2>
+      </div>
+
+      <div class="img-card mb-6">
+        <img src="../../imgs/04-ativando-equipes.png" alt="settings.json com env AGENT_TEAMS=1, seta para tela de equipes ativas">
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h3 class="text-pink-400 font-semibold mb-2">🔍 O que mostra</h3>
+          <p class="text-neutral-300 text-sm leading-relaxed">A flag única que liga a feature: dentro de <code class="text-pink-400">settings.json</code>, a seção <code class="text-pink-400">"env"</code> recebe a variável <code class="text-pink-400">"AGENT_TEAMS": 1</code>. À direita, a tela "Equipes Ativas ✓" com 3 agentinhos confirmando que o orquestrador agora pode spawnar teammates de verdade.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h3 class="text-pink-400 font-semibold mb-2">🎯 Como aplicar</h3>
+          <p class="text-neutral-300 text-sm leading-relaxed">No primeiro dia em qualquer máquina nova, edite <code class="text-pink-400">~/.claude/settings.json</code> (ou o do projeto) e adicione a env. <strong>Sem essa flag</strong>, qualquer prompt do tipo "crie uma equipe de…" cai em fluxo de subagent, e você vai pensar que a feature está bugada quando na verdade ela está desligada.</p>
+        </div>
+      </div>
+
+      <div class="bg-pink-500/10 border border-pink-500/30 rounded-xl p-5">
+        <h3 class="text-pink-400 font-semibold mb-3">🗺️ Decodificando a imagem</h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><strong class="text-pink-400">📄 settings.json</strong> — arquivo de config. Pode ser global (<code>~/.claude/</code>) ou de projeto (<code>.claude/</code>).</li>
+          <li><strong class="text-pink-400">"env": &#123; "AGENT_TEAMS": 1 &#125;</strong> — exatamente esse JSON liga a feature.</li>
+          <li><strong class="text-pink-400">🖥️ "Equipes Ativas ✓"</strong> — confirmação visual que o Claude Code reconhece a flag.</li>
+          <li><strong class="text-pink-400">"Adicionar ao config"</strong> — note que o legend não diz "executar comando"; é apenas edição de JSON.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CARD 2 -->
+    <section>
+      <div class="flex items-center space-x-3 mb-6">
+        <span class="w-10 h-10 rounded-full bg-pink-500/20 text-pink-400 text-lg font-bold flex items-center justify-center">2</span>
+        <h2 class="text-2xl font-bold">Template de prompting de equipe</h2>
+      </div>
+
+      <div class="img-card mb-6">
+        <img src="../../imgs/05-prompting-template.png" alt="Template: Crie uma equipe de [N] usando [modelo], com 3 papéis exemplo">
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h3 class="text-pink-400 font-semibold mb-2">🔍 O que mostra</h3>
+          <p class="text-neutral-300 text-sm leading-relaxed">A fórmula universal de spawn: <em>"Crie uma equipe de [N] usando [modelo]…"</em> seguida de uma lista numerada onde cada linha é <em>"[Papel] → possui + produz"</em>. Os 3 exemplos derivados (<strong>Designer de API</strong> possui <code>/api</code> e produz rotas + spec; <strong>Engenheiro de BD</strong> produz migrações + esquema; <strong>Redator de Testes</strong> produz testes + suíte) mostram a estrutura aplicada.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h3 class="text-pink-400 font-semibold mb-2">🎯 Como aplicar</h3>
+          <p class="text-neutral-300 text-sm leading-relaxed">Use linguagem <strong>simples</strong> e <strong>literal</strong>. Cada teammate precisa de duas coisas escritas no prompt: o <em>"possui"</em> (qual diretório/arquivo é seu território exclusivo) e o <em>"produz"</em> (o que será o entregável final). Sem isso, a equipe vira sopa: dois agentes brigam pelo mesmo arquivo, ou três terminam sem ter nada concreto para devolver.</p>
+        </div>
+      </div>
+
+      <div class="bg-pink-500/10 border border-pink-500/30 rounded-xl p-5">
+        <h3 class="text-pink-400 font-semibold mb-3">🗺️ Decodificando a imagem</h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><strong class="text-pink-400">[N]</strong> — número de teammates (mantenha 3–5; ver Trilha 4 para custos).</li>
+          <li><strong class="text-pink-400">[modelo]</strong> — Sonnet (default), Haiku para tarefas leves.</li>
+          <li><strong class="text-pink-400">[Papel]</strong> — nome curto e descritivo, vira o nickname do teammate.</li>
+          <li><strong class="text-pink-400">"possui"</strong> — território; arquivos/diretórios sob domínio exclusivo.</li>
+          <li><strong class="text-pink-400">"produz"</strong> — entregável; o que precisa estar pronto ao fim do trabalho.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CARD 3 -->
+    <section>
+      <div class="flex items-center space-x-3 mb-6">
+        <span class="w-10 h-10 rounded-full bg-pink-500/20 text-pink-400 text-lg font-bold flex items-center justify-center">3</span>
+        <h2 class="text-2xl font-bold">FAÇA / NÃO FAÇA</h2>
+      </div>
+
+      <div class="img-card mb-6">
+        <img src="../../imgs/06-prompts-faca-nao-faca.png" alt="Tabela espelhada: 5 boas práticas (verde) vs 5 antipatterns (vermelho)">
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h3 class="text-pink-400 font-semibold mb-2">🔍 O que mostra</h3>
+          <p class="text-neutral-300 text-sm leading-relaxed">Tabela espelhada com 5 pares lado a lado. <strong>FAÇA</strong> (verde): defina responsáveis por arquivo, defina entregáveis, nomeie destinatários, mantenha 3–5 integrantes, dê contexto completo. <strong>NÃO FAÇA</strong> (vermelho): compartilhar mesmo arquivo, entregáveis vagos, pressupor o plano, 10+ integrantes, sem contexto prévio.</p>
+        </div>
+        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5">
+          <h3 class="text-pink-400 font-semibold mb-2">🎯 Como aplicar</h3>
+          <p class="text-neutral-300 text-sm leading-relaxed">Use como <strong>checklist literal</strong> antes de enviar o prompt. Cada item da coluna vermelha equivale a um sintoma que aparece na Trilha 4 — esse card os previne na origem. Quase todo bug operacional de equipe é um item aqui que escapou no prompt inicial.</p>
+        </div>
+      </div>
+
+      <div class="bg-pink-500/10 border border-pink-500/30 rounded-xl p-5">
+        <h3 class="text-pink-400 font-semibold mb-3">🗺️ Decodificando os 5 pares</h3>
+        <ul class="space-y-2 text-neutral-300 text-sm">
+          <li><strong class="text-pink-400">Responsáveis ↔ mesmo arquivo</strong> — territórios disjuntos previnem conflitos de edição.</li>
+          <li><strong class="text-pink-400">Entregáveis claros ↔ entregáveis vagos</strong> — "produzir um relatório" é vago; "produzir <code>tests/report.md</code> com seção X" é claro.</li>
+          <li><strong class="text-pink-400">Nomear destinatários ↔ pressupor o plano</strong> — diga "envie o spec para o Backend Dev"; não assuma que o teammate vai descobrir.</li>
+          <li><strong class="text-pink-400">3–5 ↔ 10+</strong> — orçamento humano de orquestração; acima de 5 a coordenação degrada.</li>
+          <li><strong class="text-pink-400">Contexto completo ↔ sem contexto</strong> — teammates não veem seu chat (ver módulo 6.3).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- NAVEGACAO -->
+    <div class="flex flex-col sm:flex-row gap-4 pt-8 border-t border-dark-600">
+      <a href="modulo-6-1.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Anterior: 6.1 Fundamentos visuais</a>
+      <a href="modulo-6-3.html" class="flex-1 text-center px-6 py-3 bg-pink-600 text-white rounded-lg font-semibold hover:bg-pink-500 transition-colors">Próximo: 6.3 Regras, contexto & plano →</a>
+    </div>
+
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Equipes de Agentes na Prática • 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>
