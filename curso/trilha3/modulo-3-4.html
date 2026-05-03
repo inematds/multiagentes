@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 3.4 - Hooks como quality gates | Equipes de Agentes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class', theme: { extend: { colors: { primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .dark body { background-color: #111827; }
+    html:not(.dark) body { background-color: #f8fafc; }
+    html:not(.dark) .bg-dark-900 { background-color: #ffffff; }
+    html:not(.dark) .bg-dark-800 { background-color: #f9fafb; }
+    html:not(.dark) .bg-dark-700 { background-color: #f3f4f6; }
+    html:not(.dark) .bg-dark-600 { background-color: #e5e7eb; }
+    html:not(.dark) .text-neutral-100 { color: #111827; }
+    html:not(.dark) .text-neutral-300 { color: #4b5563; }
+    html:not(.dark) .text-neutral-400 { color: #6b7280; }
+    html:not(.dark) .text-neutral-500 { color: #9ca3af; }
+    html:not(.dark) .border-dark-600 { border-color: #d1d5db; }
+    html:not(.dark) .border-dark-700 { border-color: #e5e7eb; }
+    html:not(.dark) .text-purple-400 { color: #7c3aed; }
+    html:not(.dark) .bg-purple-500\/20 { background-color: rgba(124, 58, 237, 0.12); }
+    html:not(.dark) .bg-purple-500\/10 { background-color: rgba(124, 58, 237, 0.08); }
+    html:not(.dark) .border-purple-500\/30 { border-color: rgba(124, 58, 237, 0.25); }
+    html:not(.dark) .hover\:bg-purple-500\/30:hover { background-color: rgba(124, 58, 237, 0.18); }
+    html:not(.dark) .text-emerald-400 { color: #059669; }
+    html:not(.dark) .hover\:text-emerald-400:hover { color: #059669; }
+    html:not(.dark) .hover\:bg-emerald-500\/10:hover { background-color: rgba(5, 150, 105, 0.08); }
+    html:not(.dark) .text-blue-400 { color: #2563eb; }
+    html:not(.dark) .hover\:text-blue-400:hover { color: #2563eb; }
+    html:not(.dark) .hover\:bg-blue-500\/10:hover { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .text-amber-400 { color: #92400e; }
+    html:not(.dark) .hover\:text-amber-400:hover { color: #92400e; }
+    html:not(.dark) .hover\:bg-amber-500\/10:hover { background-color: rgba(217, 119, 6, 0.08); }
+    html:not(.dark) .text-teal-400 { color: #0d9488; }
+    html:not(.dark) .hover\:text-teal-400:hover { color: #0d9488; }
+    html:not(.dark) .hover\:bg-teal-500\/10:hover { background-color: rgba(13, 148, 136, 0.08); }
+    html:not(.dark) .bg-blue-900\/20 { background-color: rgba(37, 99, 235, 0.08); }
+    html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
+    html:not(.dark) .text-red-400 { color: #b91c1c; }
+    html:not(.dark) .bg-red-900\/20 { background-color: rgba(185, 28, 28, 0.08); }
+    html:not(.dark) .border-red-500\/30 { border-color: rgba(185, 28, 28, 0.25); }
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
+    html:not(.dark) .text-primary { color: #a16207; }
+    html:not(.dark) .bg-primary\/10 { background-color: rgba(161, 98, 7, 0.08); }
+    html:not(.dark) .border-primary\/40 { border-color: rgba(161, 98, 7, 0.25); }
+    html:not(.dark) .text-sky-400 { color: #0369a1; }
+    html:not(.dark) .text-yellow-400 { color: #a16207; }
+    html:not(.dark) .hover\:text-sky-300:hover { color: #0284c7; }
+    html:not(.dark) .hover\:text-yellow-300:hover { color: #854d0e; }
+    html:not(.dark) .bg-dark-900\/95 { background-color: rgba(255, 255, 255, 0.95); }
+  </style>
+</head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen">
+
+  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-14">
+        <div class="flex items-center space-x-4">
+          <a href="../../index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
+            <span class="text-2xl">🤖</span>
+            <span class="font-bold text-lg hidden sm:inline">Equipes de Agentes</span>
+          </a>
+          <span class="text-neutral-600">|</span>
+          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
+        </div>
+        <div class="flex items-center space-x-1 sm:space-x-2">
+          <a href="../trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors"><span class="sm:hidden">T1</span><span class="hidden sm:inline">Fundamentos</span></a>
+          <a href="../trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors"><span class="sm:hidden">T2</span><span class="hidden sm:inline">Setup</span></a>
+          <a href="index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-400 bg-purple-500/10"><span class="sm:hidden">T3</span><span class="hidden sm:inline">Operação</span></a>
+          <a href="../trilha4/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-amber-400 hover:bg-amber-500/10 transition-colors"><span class="sm:hidden">T4</span><span class="hidden sm:inline">Diagnóstico</span></a>
+          <a href="../trilha5/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-teal-400 hover:bg-teal-500/10 transition-colors"><span class="sm:hidden">T5</span><span class="hidden sm:inline">Multi-runtime</span></a>
+          <button id="theme-toggle" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors ml-2">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-neutral-300" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center space-x-2 text-sm text-neutral-400">
+      <a href="../../index.html" class="hover:text-purple-400">Início</a>
+      <span>/</span>
+      <a href="index.html" class="hover:text-purple-400">Operação</a>
+      <span>/</span>
+      <span class="text-purple-400">Módulo 3.4</span>
+    </div>
+  </nav>
+
+  <header class="bg-gradient-to-br from-purple-900/30 via-dark-800 to-dark-800 py-12 border-b border-dark-600">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full mb-4">MÓDULO 3.4</span>
+      <h1 class="text-3xl sm:text-4xl font-bold mb-4">🪝 Hooks como quality gates</h1>
+      <p class="text-lg text-neutral-400 max-w-3xl">TaskCreated, TaskCompleted, TeammateIdle e PreToolUse — bloqueio com exit code 2.</p>
+      <div class="grid grid-cols-4 gap-4 mt-8 max-w-2xl">
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">6</div><div class="text-xs text-neutral-400">Tópicos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">55</div><div class="text-xs text-neutral-400">Minutos</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Avançado</div><div class="text-xs text-neutral-400">Nível</div></div>
+        <div class="bg-dark-800/50 rounded-lg p-3 border border-dark-600"><div class="text-xl font-bold text-purple-400">Mão na massa</div><div class="text-xs text-neutral-400">Tipo</div></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <section id="topico-1" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">1</span>
+        <h2 class="text-2xl font-bold">🎣 Anatomia de um hook</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Hook = evento + matcher + handler. Configurado em settings.json. <strong class="text-purple-400">Hooks são determinísticos</strong> — onde prompt pode falhar, hook bloqueia com certeza.</p>
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">📌 3 partes de um hook</h3>
+        <p class="text-neutral-300 mb-4">Estrutura repetível.</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Evento</strong>: PreToolUse, TaskCompleted, etc</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Matcher</strong>: regex/literal de tool name</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><strong>Handler</strong>: command/http/mcp_tool/agent</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Exit 2 = bloqueia + envia stderr ao agente</span></li>
+        </ul>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3">💡 Localização</h3>
+        <p class="text-neutral-300">Hooks em <code>.claude/settings.json</code> (projeto) ou <code>~/.claude/settings.json</code> (user).</p>
+      </div>
+    </section>
+
+    <section id="topico-2" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">2</span>
+        <h2 class="text-2xl font-bold">📝 TaskCreated</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Dispara antes da task entrar na lista. Pode <strong class="text-purple-400">bloquear com exit 2</strong> + motivo no stderr. Útil para vetar tasks ambíguas, com escopo grande, ou que extrapolam orçamento.</p>
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">📌 Casos típicos</h3>
+        <p class="text-neutral-300 mb-4">Onde TaskCreated brilha.</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Task sem path concreto</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Task descrita em &gt; X palavras</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Task que envolve produção</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Task com tool name suspeito</span></li>
+        </ul>
+      </div>
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">📊 Formato JSON</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>Recebe title/description na stdin</li>
+          <li>Stdout JSON ou exit 2</li>
+          <li>Feedback no stderr volta ao agente</li>
+          <li>Pode reescrever task com updatedInput</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="topico-3" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">3</span>
+        <h2 class="text-2xl font-bold">✅ TaskCompleted: rodar testes</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Hook que roda <code class="text-purple-400">pytest</code>/<code class="text-purple-400">npm test</code> e <strong class="text-purple-400">bloqueia o 'completed'</strong> se algo falha. Transforma a task list em garantia de qualidade.</p>
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">📌 Script típico</h3>
+        <p class="text-neutral-300 mb-4"><code>.claude/hooks/task-completed-tests.sh</code></p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Roda subset de testes relevantes</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Exit 2 com saída do test runner</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Stderr volta ao teammate</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Teammate corrige e tenta de novo</span></li>
+        </ul>
+      </div>
+      <div class="bg-primary/10 rounded-xl border border-primary/40 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-3">💡 Subset vs full suite</h3>
+        <p class="text-neutral-300">Quick subset na task local; full suite no shutdown do team.</p>
+      </div>
+    </section>
+
+    <section id="topico-4" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">4</span>
+        <h2 class="text-2xl font-bold">😴 TeammateIdle: bloquear idle</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Quando teammate vai dormir, hook pode dizer <em>'ainda não, faltam estes deliverables'</em> e devolvê-lo ao trabalho. Evita 'idle prematuro'.</p>
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">📌 Validações úteis</h3>
+        <p class="text-neutral-300 mb-4">Verificar antes de deixar dormir.</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Arquivos requeridos existem?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Testes verdes?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Mensagens pendentes ao destinatário?</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Resumo final escrito?</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="topico-5" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">5</span>
+        <h2 class="text-2xl font-bold">🛡️ PreToolUse: bloquear comandos</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Hook inspeciona parâmetros do tool antes de rodar. Bloqueia padrões perigosos. <strong class="text-purple-400">É a sua rede de segurança</strong> — mesmo com permissões liberadas, hook protege contra acidentes.</p>
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">📌 Padrões para bloquear</h3>
+        <p class="text-neutral-300 mb-4">Comandos típicos perigosos.</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><code>rm -rf</code></span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><code>git push --force</code> em main</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><code>DROP TABLE</code></span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span><code>kubectl delete</code> em prod</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Edit em <code>.env</code></span></li>
+        </ul>
+      </div>
+      <div class="bg-blue-900/20 rounded-xl border border-blue-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-blue-400 mb-4">📊 Decisão JSON</h3>
+        <ul class="space-y-2 text-neutral-300">
+          <li>permissionDecision: deny|allow|ask|defer</li>
+          <li>permissionDecisionReason: string</li>
+          <li>updatedInput: pode reescrever</li>
+          <li>additionalContext: avisa o agente</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="topico-6" class="mb-16">
+      <div class="flex items-center space-x-4 mb-6">
+        <span class="flex items-center justify-center w-12 h-12 rounded-full bg-purple-500/20 text-purple-400 font-bold text-xl">6</span>
+        <h2 class="text-2xl font-bold">📈 Stop e PostToolUse: telemetria</h2>
+      </div>
+      <p class="text-neutral-300 mb-6 leading-relaxed">Stop dispara ao fim de cada turno; PostToolUse após cada tool. <strong class="text-purple-400">Sem telemetria você não otimiza</strong>. Hooks de log dão dados para decidir tamanhos e modelos.</p>
+      <div class="bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-xl border border-purple-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-purple-400 mb-4">📌 O que logar</h3>
+        <p class="text-neutral-300 mb-4">Métricas que viram decisão.</p>
+        <ul class="space-y-2 text-neutral-300">
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Tokens por papel</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Latência por tool</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Taxa de erro por papel</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Tools mais usados</span></li>
+          <li class="flex items-start space-x-2"><span class="text-purple-400 mt-1">•</span><span>Tasks bloqueadas por hook</span></li>
+        </ul>
+      </div>
+      <div class="bg-red-900/20 rounded-xl border border-red-500/30 p-6 mb-6">
+        <h3 class="text-lg font-semibold text-red-400 mb-3">⚠️ Cuidado com Stop bloqueando</h3>
+        <p class="text-neutral-300">Hook Stop com block pode fazer agente nunca terminar. Use com extrema cautela.</p>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <div class="bg-gradient-to-br from-purple-900/40 via-dark-800 to-dark-800 rounded-xl border border-purple-500/30 p-8">
+        <h2 class="text-2xl font-bold mb-6">📌 Resumo do Módulo</h2>
+        <div class="space-y-4 mb-8">
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Anatomia de um hook</strong><span class="text-neutral-400"> — Evento, matcher, comando</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">TaskCreated</strong><span class="text-neutral-400"> — Bloquear criação de task</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">TaskCompleted: rodar testes</strong><span class="text-neutral-400"> — Não fecha sem verde</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">TeammateIdle: bloquear idle</strong><span class="text-neutral-400"> — Forçar mais um round</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">PreToolUse: bloquear comandos</strong><span class="text-neutral-400"> — Não deixar rodar rm -rf</span></div></div>
+          <div class="flex items-start space-x-3"><span class="text-purple-400 mt-1">✓</span><div><strong class="text-white">Stop e PostToolUse: telemetria</strong><span class="text-neutral-400"> — O que medir e quando</span></div></div>
+        </div>
+        <div class="bg-dark-800/50 rounded-lg p-4 mb-8">
+          <h3 class="font-semibold text-purple-400 mb-2">Próximo módulo:</h3>
+          <p class="text-neutral-300">3.5 — Display: tmux, iTerm2, split-pane</p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="index.html" class="flex-1 text-center px-6 py-3 bg-dark-700 text-neutral-300 rounded-lg font-semibold hover:bg-dark-600 transition-colors">← Voltar para Trilha</a>
+          <a href="modulo-3-5.html" class="flex-1 text-center px-6 py-3 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-500 transition-colors">Próximo Módulo →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-dark-600 py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+      <p>Equipes de Agentes na Prática • 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    const html = document.documentElement;
+    if (localStorage.getItem('theme') === 'light' || (!localStorage.getItem('theme') && !html.classList.contains('dark'))) {
+      themeToggleDarkIcon.classList.remove('hidden');
+      html.classList.remove('dark');
+    } else {
+      themeToggleLightIcon.classList.remove('hidden');
+    }
+    themeToggle.addEventListener('click', () => {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      html.classList.toggle('dark');
+      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+    });
+  </script>
+</body>
+</html>

@@ -98,10 +98,32 @@
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
+    <!-- NAVEGACAO RAPIDA -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Mapa da trilha</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <a href="#modulo-2-1" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">⚡ Setup do Claude Code</h3>
+          <p class="text-xs text-neutral-400">Flag experimental, settings.json, modos e treinar o repo</p>
+        </a>
+        <a href="#modulo-2-2" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">📝 Anatomia do prompt de spawn</h3>
+          <p class="text-xs text-neutral-400">Goal → Team → Roles → Final deliverables</p>
+        </a>
+        <a href="#modulo-2-3" class="group bg-dark-800 rounded-xl border border-dark-600 hover:border-blue-500/30 p-5 transition-all">
+          <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold text-sm">2.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
+          <h3 class="font-semibold mb-1 group-hover:text-blue-400 transition-colors">✓✗ Faça vs Não Faça</h3>
+          <p class="text-xs text-neutral-400">5 práticas de ouro e 5 antipatterns para evitar</p>
+        </a>
+      </div>
+    </section>
+
     <h2 class="text-2xl font-bold mb-6">Conteúdo detalhado</h2>
 
     <!-- MODULO 2.1 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-2-1" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.1</span><span class="text-xs text-neutral-500">~50 min</span></div>
         <h3 class="text-2xl font-bold mb-2">⚡ Setup do Claude Code</h3>
@@ -206,7 +228,7 @@
     </div>
 
     <!-- MODULO 2.2 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-2-2" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.2</span><span class="text-xs text-neutral-500">~55 min</span></div>
         <h3 class="text-2xl font-bold mb-2">📝 Anatomia do prompt de spawn</h3>
@@ -311,7 +333,7 @@
     </div>
 
     <!-- MODULO 2.3 -->
-    <div class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
+    <div id="modulo-2-3" class="bg-dark-800 rounded-xl border border-dark-600 mb-6">
       <div class="p-6 border-b border-dark-600">
         <div class="flex items-center justify-between mb-2"><span class="text-blue-400 font-bold">2.3</span><span class="text-xs text-neutral-500">~50 min</span></div>
         <h3 class="text-2xl font-bold mb-2">✓✗ Faça vs Não Faça</h3>
